@@ -1,0 +1,71 @@
+<!doctype html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <link rel="icon" href="favicon.ico">
+
+    <title>Autos</title>
+    <link th:href="@{/bootstrap/css/bootstrap.min.css}" rel="stylesheet">
+    <!-- Custom styles for this template -->
+    <link th:href="@{/bootstrap/css/jumbotron.css}" rel="stylesheet">
+    <link th:href="@{/bootstrap/css/sticky-footer-navbar.css}" rel="stylesheet">
+    <link th:href="@{https://use.fontawesome.com/releases/v5.5.0/css/all.css}" rel="stylesheet">
+  </head>
+
+  <body >
+
+     <header th:insert="fragmentos/menu.html::menu-principal"></header >
+
+<br><br>
+	<br>
+
+    <main role="main">     
+     
+      <div class="container"> 
+
+        <div class="card">
+          <h4 class="card-header"><strong>Listado de Marcas</strong></h4>              
+          <div class="card-body">
+            <a class="btn btn-success" th:href="@{/categoria/crear}" role="button"><i class="fas fa-file" aria-hidden="true"></i> Nueva</a>            
+            <hr>
+            <table class="table">
+             <thead class="thead-dark">
+                <tr>
+                  <th scope="col">Id</th>
+                  <th scope="col">Marca</th>
+                  <th scope="col">Pais de origen</th>
+                  <th scope="col">Operaciones</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr th:each="categoria:${categorias}">
+                  <th scope="row" th:text=${categoria.id}></th>
+                  <td th:text=${categoria.nombre}></td >
+                  <td th:text=${categoria.descripcion}></td >
+                  <td>
+                    <a th:href="@{/categoria/consultar(id=${categoria.id})}"  class="btn btn-primary" role="button" title="editar"><i class="fas fa-pencil-alt" aria-hidden="true"></i></a>
+                    <a th:href="@{/categoria/eliminar(id=${categoria.id})}" onclick="confirm('¿Estas seguro?')" class="btn btn-danger" role="button" title="eliminar"><i class="fas fa-trash" aria-hidden="true"></i></a>
+                  </td>
+                </tr >             
+              </tbody>
+            </table>
+            
+          </div>
+        </div>
+      </div> <!-- /container -->
+
+    </main>
+
+    <footer th:insert="fragmentos/pie.html::pie-pagina">
+    </footer>
+    <!-- Bootstrap core JavaScript
+    ================================================== -->
+    <!-- Placed at the end of the document so the pages load faster -->
+    <script th:src="@{https://code.jquery.com/jquery-3.3.1.slim.min.js}"></script>
+    <script src="https://kit.fontawesome.com/6a198f5334.js" crossorigin="anonymous"></script>
+    <script th:src="@{/bootstrap/js/bootstrap.min.js}"></script>  
+  </body>
+</html>

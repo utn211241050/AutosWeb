@@ -1,0 +1,101 @@
+<!doctype html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <link rel="icon" href="favicon.ico">
+
+    <title>Autos</title>
+    <!-- Bootstrap core CSS -->
+    <link th:href="@{/bootstrap/css/bootstrap.min.css}" rel="stylesheet">
+    <!-- Custom styles for this template -->
+    <link th:href="@{/bootstrap/css/jumbotron.css}" rel="stylesheet">
+    <link th:href="@{/bootstrap/css/sticky-footer-navbar.css}" rel="stylesheet">
+    <link href="https://use.fontawesome.com/releases/v5.5.0/css/all.css" rel="stylesheet">
+  	<link href="https://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css" rel="stylesheet" >
+  </head>
+
+  <body >
+
+ <header th:insert="fragmentos/menu.html::menu-principal"></header >
+<br><br>
+	<br>
+    <main role="main">     
+      
+      <div class="container"> 
+
+        <div class="card ">
+          <h4 class="card-header"><strong>Datos del Auto</strong></h4>              
+          <div class="card-body">
+            <form method="post" th:action="@{/libro/guardar}" th:object="${libro}" enctype="multipart/form-data"> 
+            <div th:if="${#fields.hasErrors('*')}"
+            			class="alert alert-danger" role="alert">
+            			Verifique sus datos:
+            			<ul>
+            			<li th:each="error:${#fields.errors('*')}" th:text="${error}"></li >
+            			</ul>
+            </div >
+              <div class="row">
+                <div class="col-md-3"> 
+                  <div class="form-group">
+                  <input type="hidden" th:field="*{id}">
+                    <label for="titulo">Modelo</label>
+                    <input type="text" class="form-control" id="titulo" th:field="*{titulo}" name="titulo" placeholder="Modelo" required="required">
+                  </div>
+                </div>
+              <div class="row" >
+                <div class="col-md-3"> 
+                  <div class="form-group">
+                    <label for="categoria">Marca</label>
+                    <select class="form-control" name="categoria" id="categoria" th:field="*{categoria.id}">
+                      <option th:each="categoria: ${categorias}" th:value="${categoria.id}" th:text="${categoria.nombre}"></option>
+                    </select>
+                  </div>
+                </div>
+
+                
+               
+              </div>    
+              <div class="row">
+                <div class="col-md-3"> 
+                  <div class="form-group">
+                    <label for="precio">precio</label>
+                    <input type="text" class="form-control" name="precio" th:field="*{precio}" id="precio" placeholder="Precio" required="required">
+                  </div>
+                </div>
+                <div class="col-md-3"> 
+                  <div class="form-group">
+                    <label for="nPaginas">Año</label>
+                    <input type="text" class="form-control" name="nPaginas" th:field="*{nPaginas}" id="nPaginas" placeholder="Año" required="required">
+                  </div>
+                </div>
+                <div class="col-md-3"> 
+                  <div class="form-group">
+                    <label for="archivoImagen">Imagen</label>
+                    <input type="file" class="form-control-file" name="archivoImagen" id="archivoImagen" th:src="@{/logos/{img} (img=${libro.imagen})}" >
+                  </div>
+                </div>
+              </div> 
+              <hr>
+              <div class="row">
+                
+              </div> 
+              <button type="submit" class="btn btn-primary">Guardar</button>  
+            </form>
+          </div>
+        </div>
+      </div> <!-- /container -->
+
+    </main>
+
+    <!-- Bootstrap core JavaScript
+    ================================================== -->
+    <!-- Placed at the end of the document so the pages load faster -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script> 
+    <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+	<script th:src="@{/bootstrap/js/bootstrap.min.js}"></script>    
+    <script th:src="@{/tinymce/tinymce.min.js}"></script>
+  </body>
+</html>

@@ -1,0 +1,80 @@
+<!doctype html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <link rel="icon" href="favicon.ico">
+
+    <title>Autos</title>
+    <!-- Bootstrap core CSS -->
+    <link th:href="@{/bootstrap/css/bootstrap.min.css}" rel="stylesheet">
+    <!-- Custom styles for this template -->
+    <link th:href="@{/bootstrap/css/jumbotron.css}" rel="stylesheet">
+    <link th:href="@{/bootstrap/css/sticky-footer-navbar.css}" rel="stylesheet">
+    
+  </head>
+
+  <body >
+
+ <header th:insert="fragmentos/menu.html::menu-principal"></header >
+<br><br>
+	<br>
+    <main role="main">     
+    <br><br>
+      <div class="container"> 
+
+        <div class="card">
+          <h4 class="card-header"><strong>Listado de Autos</strong></h4>              
+          <div class="card-body">
+            <a class="btn btn-success" th:href="@{/libro/nuevo}" role="button"><i class="fas fa-file" aria-hidden="true"></i> Nuevo</a>            
+            <hr>
+           <table class="table">
+             <thead class="thead-dark">
+                <tr>
+                  <th scope="col">Id</th>
+                  <th scope="col">Modelo</th>
+                  <th scope="col">precio</th>
+                  <th scope="col">Año</th>
+                  <th scope="col">Marca</th>
+                  <th scope="col">Imagen</th>
+                  <th scope="col">Operaciones</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr th:each="vacante:${vacantes}">
+                  <th scope="row" th:text="${vacante.id}"></th>
+                  <td th:text="${vacante.titulo}"></td >
+                  <td th:text="${vacante.precio}"></td >
+	              <td th:text="${vacante.nPaginas}"></td >
+                  <td th:text="${vacante.categoria.nombre}"></td >
+                   <td class="col-md-2">
+	                <img th:src="@{/images/{img}(img=${vacante.imagen})}" width="80" height="100"></img>
+	              </td>
+                  <td>
+                    <a th:href="@{/libro/consultar(id=${vacante.id})}" class="btn btn-primary" role="button" title="editar"><i class="fas fa-pencil-alt" aria-hidden="true"></i></a>
+                    <a th:href="@{/libro/eliminar(id=${vacante.id})}" onclick=" confirm('¿Estas seguro?')" class="btn btn-danger" role="button" title="eliminar"><i class="fas fa-trash" aria-hidden="true"></i></a>
+  					<a th:href="@{/libro/detalle(id=${vacante.id})}" class="btn btn-dark" role="button" title="Detalles"><i class="fa-solid fa-magnifying-glass" ></i></a>    
+  					
+                  </td>
+                </tr >             
+              </tbody>
+            </table>
+            
+          </div>
+        </div>
+      </div> <!-- /container -->
+
+    </main>
+
+ <footer th:insert="fragmentos/pie.html::pie-pagina">
+    </footer>
+    <!-- Bootstrap core JavaScript
+    ================================================== -->
+    <!-- Placed at the end of the document so the pages load faster -->
+    <script th:src="@{https://code.jquery.com/jquery-3.3.1.slim.min.js}"></script>
+    <script src="https://kit.fontawesome.com/6a198f5334.js" crossorigin="anonymous"></script>
+    <script th:src="@{/bootstrap/js/bootstrap.min.js}"></script>     
+  </body>
+</html>
